@@ -1,0 +1,16 @@
+
+  {
+    "name": "Network Rooms",
+    "short_name": "App UTTT",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#4a90e2",
+    "icons": [
+      {
+        "src": "https://imgs.search.brave.com/I2nGex8rUU2QqH2KJuihovLb-B2UP-BeWAnvXE8o4aE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAxNC8w/NC8wMi8xNy8wNC9i/ZWQtMzA3ODE3XzEy/ODAucG5n",
+        "sizes": "360x360",
+        "type": "image/png"
+      }
+    ]
+  }
