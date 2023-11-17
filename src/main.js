@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import '/src/js/app.js';
+import '/sw.js';
 
 import router from './router';
 
