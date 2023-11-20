@@ -27,17 +27,30 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-
 const messaging = getMessaging();
+
+// Configurar el oyente para manejar notificaciones cuando la aplicación está en primer plano.
 onMessage(messaging, (payload) => {
   console.log('Message received. ', payload);
-  // ...
+
+  const notificationTitle = payload.notification?.title || payload.data?.title || 'Default Title';
+  const notificationBody = payload.notification?.body || payload.data?.body || 'Default Body';
+
+  // Muestra la notificación directamente en la interfaz de usuario
+  const notificationOptions = {
+    body: notificationBody,
+  };
+  
+  console.log('Showing notification in foreground:', notificationTitle, notificationOptions);
+
+  new Notification(notificationTitle, notificationOptions);
 });
+
 
 getToken(messaging, { vapidKey: 'BGs2FR3cK3c35c1fn2wjElg1bd3d6fwqxnY06KcqNDkGfK_RGdQBViFXeyf2z7lRR-0oW-LYIvRiARXWgHT6G-s' }).then((currentToken) => {
   if (currentToken) {
     // Send the token to your server and update the UI if necessary
-	console.log("Token:", currentToken);
+    console.log("Token:", currentToken);
     // ...
   } else {
     // Show permission request UI

@@ -1,7 +1,5 @@
-
 importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js');
-
 
 firebase.initializeApp({
     apiKey: "AIzaSyBlF2Zdg-ltkI-KTltKQhH1iNxmnU3bxRU",
@@ -12,21 +10,20 @@ firebase.initializeApp({
     messagingSenderId: "150054104750",
     appId: "1:150054104750:web:d43128b49980caf641073f",
     measurementId: "G-WR49335BG8"
-  });
+});
 
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage((payload) => {
-    console.log(
-      '[firebase-messaging-sw.js] Received background message ',
-      payload
-    );
-    // Customize notification here
-    const notificationTitle = payload.notification.title;
+    console.log('[firebase-messaging-sw.js] Received background message ', payload);
+
+    const notificationTitle = payload.notification?.title || payload.data?.title || 'Default Title';
+    const notificationBody = payload.notification?.body || payload.data?.body || 'Default Body';
+
+    // Muestra la notificación directamente en la interfaz de usuario
     const notificationOptions = {
-      body: payload.notification.body,
-      icon: '/cara-feliz.png'
+        body: notificationBody,
     };
-  
+
     self.registration.showNotification(notificationTitle, notificationOptions);
-  });
+});

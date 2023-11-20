@@ -15,9 +15,12 @@ if('serviceWorker' in navigator) {
 
       Notification.requestPermission().then((permission) => {
         if (permission === 'granted') {
-          console.log('Permiso de notificacion concedido');
+          console.log('Notification permission granted.');
+        } else {
+          console.log('Notification permission denied.');
         }
       });
+      
   }).catch((error) => {
     console.error('Error al regitrar Service Worker:', error);
   });
