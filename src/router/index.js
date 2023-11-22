@@ -27,6 +27,10 @@ const router = createRouter({
   {
     path: '/registerRoom',
     component: () => import('../views/RegisterRoom.vue')
+  },
+  {
+    path: '/camarita',
+    component: () => import('../views/Camara.vue')
   }
 ]
 });

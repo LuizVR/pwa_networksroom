@@ -24,10 +24,15 @@
 				<span class="material-icons">group</span>
 				<span class="text">Personas</span>
 			</router-link>
+			<router-link to="/camarita" class="button">
+				<span class="material-icons">camera</span>
+				<span class="text">Camara</span>	
+			</router-link>
 			<router-link to="/login" class="button">
 				<span class="material-icons">email</span>
 				<span class="text">Login</span>
 			</router-link>
+			
 		</div>
 
 		<div class="flex"></div>
