@@ -18,11 +18,11 @@
 <script>
 export default {
   methods: {
-    learnMore() {
-      // Agrega la lógica aquí para manejar lo que ocurre al hacer clic en el botón "Learn More".
-    },
+    toggleCamera() {
+      this.stopCamera();
+    }
   },
-};
+}
 </script>
 
 <style scoped>
