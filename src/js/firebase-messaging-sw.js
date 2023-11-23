@@ -23,6 +23,7 @@ messaging.onBackgroundMessage((payload) => {
     // Muestra la notificación directamente en la interfaz de usuario
     const notificationOptions = {
         body: notificationBody,
+        icon: '/src/images/Icons/cara-feliz.png'
     };
 
     self.registration.showNotification(notificationTitle, notificationOptions);

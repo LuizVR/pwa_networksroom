@@ -1,26 +1,36 @@
 <template>
   <div class="register">
     <div class="form">
-      <h1 class="title">Registrar</h1>
+      <h1 class="title">Registrar Cuarto</h1>
       <form @submit.prevent="register">
-        <label class="form-label">Direccion</label>
-        <input v-model="form.direccion" class="form-input" required />
+        <div class="form-group">
+          <label class="form-label">Direccion</label>
+          <input v-model="form.direccion" class="form-input" required />
+        </div>
 
-        <label class="form-label">Foto</label>
-        <input type="file" @change="handleFileUpload" class="form-input" required />
+        <div class="form-group">
+          <label class="form-label">Foto</label>
+          <input type="file" @change="handleFileUpload" class="form-input" required />
+        </div>
 
-        <label class="form-label">Precio</label>
-        <input v-model="form.precio" class="form-input" required />
+        <div class="form-group">
+          <label class="form-label">Precio</label>
+          <input v-model="form.precio" class="form-input" required />
+        </div>
 
-        <label class="form-label">Descripción</label>
-        <input v-model="form.descripcion" class="form-input" required />
+        <div class="form-group">
+          <label class="form-label">Descripción</label>
+          <input v-model="form.descripcion" class="form-input" required />
+        </div>
 
-        <label class="form-label">Servicios</label>
-        <input v-model="form.servicios" class="form-input" required />
+        <div class="form-group">
+          <label class="form-label">Servicios</label>
+          <input v-model="form.servicios" class="form-input" required />
+        </div>
 
         <div class="form-actions">
           <button class="form-submit" @click="guardar">Guardar</button>
-          <router-link to="/personas" class="form-submit mr-4">Cancelar</router-link>
+          <router-link to="/about" class="form-link cancel-btn">Cancelar</router-link>
         </div>
       </form>
     </div>
@@ -88,9 +98,14 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .register {
-  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 200vh;
 }
 
 .title {
@@ -98,44 +113,60 @@ export default {
 }
 
 .form {
-  margin: 3rem auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 20%;
-  min-width: 350px;
-  max-width: 100%;
   background: rgba(19, 35, 47, 0.9);
   border-radius: 5px;
   padding: 40px;
-  box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 124px 130px 124px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente */
 }
 
-.form-label {
-  margin-top: 2rem;
-  color: white;
-  margin-bottom: 0.5rem;
+.form-group {
+  margin-bottom: 2rem;
+  width: 100%; /* Ajusta el ancho del grupo de formulario */
 }
 
-.form-input {
-  padding: 10px 15px;
-  background: none;
-  background-image: none;
-  border: 1px solid white;
-  color: white;
+.form-submit,
+.cancel-btn {
+  width: 100%;
+  margin-top: 1rem;
 }
 
 .form-submit {
   background: #1ab188;
   border: none;
   color: white;
-  margin-top: 3rem;
   padding: 1rem 0;
   cursor: pointer;
+}
+
+.cancel-btn {
+  background: #ff4a4a;
+  text-decoration: none;
+  color: white;
+  padding: 1rem 0;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
 }
 
 .error {
   margin: 1rem 0 0;
   color: #ff4a96;
+}
+
+.form-label {
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.form-input {
+  padding: 15px;
+  background: none;
+  background-image: none;
+  border: 1px solid white;
+  color: white;
+  width: 100%; /* Ajusta el ancho del campo de entrada */
 }
 </style>

@@ -2,9 +2,12 @@
   <div>
     <div class="card-container">
       <div v-for="usuario in listaUsuarios" :key="usuario.roomId" class="card">
-        <img :src="getImageSource(usuario.foto)" class="card-img-top">
+        <div class="card-image-container" @mouseover="moveImageUp" @mouseleave="resetImagePosition">
+          <img :src="getImageSource(usuario.foto)" class="card-img-top" />
+        </div>
         <div class="card-body">
-          <h5 class="card-title">{{ usuario.direccion }}</h5>
+          <h2 class="card-title">{{ usuario.direccion }}</h2>
+          <h3 class="card-title">${{ usuario.precio }}</h3>
         </div>
       </div>
     </div>
@@ -50,7 +53,15 @@ export default {
       }
     };
 
-    return { listaUsuarios, redirectToRegister, getImageSource };
+    const moveImageUp = (event) => {
+      event.target.style.transform = 'translateY(-10px)';
+    };
+
+    const resetImagePosition = (event) => {
+      event.target.style.transform = 'translateY(0)';
+    };
+
+    return { listaUsuarios, redirectToRegister, getImageSource, moveImageUp, resetImagePosition };
   },
 };
 </script>
@@ -60,17 +71,63 @@ export default {
 .card-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around; /* Modificado para una mejor alineación */
 }
 
 .card {
-  width: 18rem;
-  margin: 10px;
+  position: relative;
+  width: calc(33.33% - 20px); /* 33.33% para tres columnas y ajuste de margen */
+  margin: 10px; /* Espaciado entre las tarjetas */
+  border-radius: 15px; /* Bordes redondeados más prominentes */
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-image-container {
+  position: relative;
+  overflow: hidden;
+  border-top-left-radius: 15px; /* Añadido para bordes redondeados en la esquina superior izquierda de la imagen */
+  border-top-right-radius: 15px; /* Añadido para bordes redondeados en la esquina superior derecha de la imagen */
 }
 
 .card-img-top {
-  max-height: 200px;
+  max-height: 300px; /* Ajustado el tamaño máximo de la imagen */
   object-fit: cover;
+  width: 100%;
+  transition: transform 0.3s ease-in-out;
 }
 
-/* Resto de tus estilos ... */
+.card:hover .card-img-top {
+  transform: translateY(-10px);
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.button-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-primary:hover {
+  background-color: #2980b9;
+}
 </style>

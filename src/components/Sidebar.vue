@@ -17,7 +17,7 @@
 				<span class="text">Home</span>
 			</router-link>
 			<router-link to="/about" class="button">
-				<span class="material-icons">description</span>
+				<span class="material-icons">house</span>
 				<span class="text">Habitaciones</span>
 			</router-link>
 			<router-link to="/personas" class="button">
