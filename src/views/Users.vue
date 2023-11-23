@@ -31,7 +31,7 @@ export default {
 
     onMounted(async () => {
       try {
-        const direcciona = "https://localhost:44329/api/Users";
+        const direcciona = "https://www.networkrooms.somee.com/api/Users";
         const response = await axios.get(direcciona);
         listaUsuarios.value = response.data;
       } catch (error) {

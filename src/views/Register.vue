@@ -62,7 +62,7 @@ export default {
         };
 
         // Enviar la solicitud POST al servidor
-        const response = await axios.post("https://localhost:44329/api/Users", lugar, {
+        const response = await axios.post("https://www.networkrooms.somee.com/api/Users", lugar, {
           headers: {
             'Content-Type': 'application/json',
           },
