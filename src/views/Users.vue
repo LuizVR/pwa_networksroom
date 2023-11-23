@@ -1,97 +1,76 @@
 <template>
-    <div>
-      <table class="table table-hover table-bordered">
-        <thead>
-          <tr class="table-active">
-            <th>Nombre</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="usuario in listaUsuarios" :key="usuario.userId">
-            <td>{{ usuario.nombre }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <br />
-      <div class="button-container">
-        <button class="btn-primary" @click="redirectToRegister">Registrar</button>
+  <div>
+    <div class="card-container">
+      <div v-for="usuario in listaUsuarios" :key="usuario.roomId" class="card">
+        <img :src="getImageSource(usuario.foto)" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">{{ usuario.nombre }}</h5>
+        </div>
       </div>
     </div>
-  </template>
-  
-  <script>
-  import axios from "axios";
-  import { ref, onMounted } from "vue";
-  import { useRouter } from 'vue-router';
-  
-  export default {
-    name: "ByIdFire",
-    setup() {
-      const router = useRouter();
-      const listaUsuarios = ref(null);
-  
-      onMounted(async () => {
-        try {
-          const direccion = "https://localhost:44329/api/Users";
-          const response = await axios.get(direccion);
-          listaUsuarios.value = response.data;
-        } catch (error) {
-          console.error(error);
-        }
-      });
-  
-      const redirectToRegister = () => {
-        // Utilizamos router para acceder al método push del router
-        router.push("/register");
-      };
-  
-      return { listaUsuarios, redirectToRegister };
-    },
-  };
-  </script>
-  
-  <style>
-  /* Estilos para la tabla */
-  .table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  .table td,
-  .table th {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-  
-  .table th {
-    background-color: #f2f2f2;
-  }
-  
-  /* Estilos para la cabecera de la tabla */
-  .table-active th {
-    background-color: #007bff;
-    color: #fff;
-  }
-  
-  /* Estilos para la fila resaltada */
-  .table tbody tr:hover {
-    background-color: #f5f5f5;
-  }
-  
-  /* Estilos para el botón */
-  .button-container {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .btn-primary {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  </style>
-  
+    <br />
+    <div class="button-container">
+      <button class="btn-primary" @click="redirectToRegister">Registrar</button>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+import { ref, onMounted } from "vue";
+import { useRouter } from 'vue-router';
+
+export default {
+  name: "ByIdFire",
+  setup() {
+    const router = useRouter();
+    const listaUsuarios = ref(null);
+
+    onMounted(async () => {
+      try {
+        const direcciona = "https://localhost:44329/api/Users";
+        const response = await axios.get(direcciona);
+        listaUsuarios.value = response.data;
+      } catch (error) {
+        console.error(error);
+      }
+    });
+
+    const redirectToRegister = () => {
+      router.push("/register");
+    };
+
+    // Función para obtener la fuente de la imagen
+    const getImageSource = (foto) => {
+      // Verificar si la foto es una URL directa o datos en Base64
+      if (foto.startsWith('http')) {
+        return foto; // Es una URL directa
+      } else {
+        return `data:image/jpeg;base64,${foto}`; // Datos en Base64
+      }
+    };
+
+    return { listaUsuarios, redirectToRegister, getImageSource };
+  },
+};
+</script>
+
+<style>
+/* Estilos para las tarjetas */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 18rem;
+  margin: 10px;
+}
+
+.card-img-top {
+  max-height: 200px;
+  object-fit: cover;
+}
+
+/* Resto de tus estilos ... */
+</style>

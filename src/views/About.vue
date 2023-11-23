@@ -1,17 +1,13 @@
 <template>
   <div>
-    <table class="table table-hover table-bordered">
-      <thead>
-        <tr class="table-active">
-          <th>Nombre</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="usuario in listaUsuarios" :key="usuario.roomId">
-          <td>{{ usuario.direccion }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="card-container">
+      <div v-for="usuario in listaUsuarios" :key="usuario.roomId" class="card">
+        <img :src="getImageSource(usuario.foto)" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">{{ usuario.direccion }}</h5>
+        </div>
+      </div>
+    </div>
     <br />
     <div class="button-container">
       <button class="btn-primary" @click="redirectToRegister">Registrar</button>
@@ -41,56 +37,40 @@ export default {
     });
 
     const redirectToRegister = () => {
-      // Utilizamos router para acceder al método push del router
       router.push("/registerRoom");
     };
 
-    return { listaUsuarios, redirectToRegister };
+    // Función para obtener la fuente de la imagen
+    const getImageSource = (foto) => {
+      // Verificar si la foto es una URL directa o datos en Base64
+      if (foto.startsWith('http')) {
+        return foto; // Es una URL directa
+      } else {
+        return `data:image/jpeg;base64,${foto}`; // Datos en Base64
+      }
+    };
+
+    return { listaUsuarios, redirectToRegister, getImageSource };
   },
 };
 </script>
 
 <style>
-/* Estilos para la tabla */
-.table {
-  border-collapse: collapse;
-  width: 100%;
+/* Estilos para las tarjetas */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.table td,
-.table th {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
+.card {
+  width: 18rem;
+  margin: 10px;
 }
 
-.table th {
-  background-color: #f2f2f2;
+.card-img-top {
+  max-height: 200px;
+  object-fit: cover;
 }
 
-/* Estilos para la cabecera de la tabla */
-.table-active th {
-  background-color: #007bff;
-  color: #fff;
-}
-
-/* Estilos para la fila resaltada */
-.table tbody tr:hover {
-  background-color: #f5f5f5;
-}
-
-/* Estilos para el botón */
-.button-container {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.btn-primary {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-}
+/* Resto de tus estilos ... */
 </style>
